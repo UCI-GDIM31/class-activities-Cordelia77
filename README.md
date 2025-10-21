@@ -21,7 +21,11 @@ Output type: boolean
 For instance, a class is like a cake recipe: it's a template that specifies the required ingredients and the steps to follow. Components are the actual cakes made according to the recipe, each cake has its own ingredient proportions and can be used independently. In this analogy, member variables are the ingredients of the cake, representing the characteristics of each object, such as a cat's health points or a ball's movement speed. Methods are the actions the cake can perform, like cutting, decorating, or baking, corresponding to the behaviors of objects, such as a cat moving and jumping, or its reaction when hit by a ball. 
 As for why the small ball becomes particularly bright after bouncing multiple times: each time it collides, the speed of the ball is multiplied by an acceleration coefficient. Once it exceeds a certain threshold, the color brightness will increase. Because the small ball in the scene collides frequently, the speed and brightness effect accumulate continuously. After bouncing many times, it naturally becomes super bright.
 
-
+### W4
+I belong to Table 5, and I will describe line 5, 22, 25 these three lines of code.
+Line 5: _moveSpeed is a member variable of type float. [SerializeField] lets us see and adjust it in the Inspector even though it’s private. It controls how fast the cat moves.
+Line 22: This line calls the method Input.GetAxis("Vertical") to read player input. The result (a float between -1 and 1) is multiplied by _moveSpeed and Time.deltaTime to calculate smooth movement.
+Line 25: This line calls the method Translate() from the Transform component to move the cat forward along the Z-axis by translation.
 
 
 ## Open-Source Assets
