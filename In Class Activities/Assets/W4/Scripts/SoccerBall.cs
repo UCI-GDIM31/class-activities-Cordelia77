@@ -8,91 +8,71 @@ public class SoccerBall : MonoBehaviour
     [SerializeField] private TMP_Text _timeText;
     [SerializeField] private ParticleSystem _goalVFX;
 
+    // STEP 5 -----------------------------------------------------------------
+    // Create a new member variable to keep track of the points.
+    private int _points = 0;
+
+    // STEP 6 -----------------------------------------------------------------
+    // Create a time variable to track how long it's been since the last goal.
+    private float _timeSinceLastGoal = 0f;
+
     // STEP 1 -----------------------------------------------------------------
     // The OnTriggerEnter method is a collision method called by Unity that
     //      tells our object when it's hit a collider with Is Trigger checked.
-    // Uncomment and FIX the METHOD SIGNATURE to make this method work.
-    //
-    // You will need to read the documentation here:
-    // https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Collider.OnTriggerEnter.html
-    //      which has an example of a class using this method :)
-    //
-    // You'll also need to have all of your colliders set up properly in the Scene ;)
-    //
-    // Also, uncomment and FIX the Debug.Log line.
-
-    //private ?? ??
-    //{
-        // finish STEP 1 by uncommenting and fixing the below line!
-        //Debug.Log(SoccerBall detected a collision with a trigger collider!);
-
+    private void OnTriggerEnter(Collider other)
+    {
         // STEP 2 -------------------------------------------------------------
         // Write an IF STATEMENT to check if the game object we collided with
         //      has the tag "Goal".
-        // Refer to the slides for an example of how to check this :)
-        //
-        // Then, move your Debug.Log() statement so that it's only called if
-        //      the colliding object has the "Goal" tag.
-
-
+        if (other.CompareTag("Goal"))
+        {
+            // When we hit a Goal, call MadeGoal method
+            MadeGoal();
+        }
         // STEP 2 -------------------------------------------------------------
-    //}
-
+    }
     // STEP 1 -----------------------------------------------------------------
-
 
     // STEP 3 -----------------------------------------------------------------
     // Next, we're going to make a method named MadeGoal to call if the
     //      SoccerBall collided with an object tagged "Goal".
     // MadeGoal RETURNS NOTHING, and has NO INPUT.
-    // 
-    // Once you've created MadeGoal,
-    //      move your Debug.Log() statement into MadeGoal, and
-    //      call MadeGoal from inside your if statement in OnTriggerEnter.
-    
+    private void MadeGoal()
+    {
         // STEP 4 -------------------------------------------------------------
         // _goalVFX is a ParticleSystem, a Component for creating VFX.
-        // ParticleSystem has a method named Play() that displays the VFX:
-        // https://docs.unity3d.com/6000.0/Documentation/ScriptReference/ParticleSystem.Play.html 
-        //
-        // Call Play on _goalVFX.
-
+        // ParticleSystem has a method named Play() that displays the VFX.
+        if (_goalVFX != null)
+        {
+            _goalVFX.Play();
+        }
         // STEP 4 -------------------------------------------------------------
-    
-    
+
+        // STEP 5 -------------------------------------------------------------
+        // Update points and show the new score on the screen.
+        _points++;
+        if (_pointsText != null)
+        {
+            _pointsText.text = "Points: " + _points.ToString();
+        }
+        // STEP 5 -------------------------------------------------------------
+
+        // STEP 6 -------------------------------------------------------------
+        // Reset the time counter when we make a goal.
+        _timeSinceLastGoal = 0f;
+        // STEP 6 -------------------------------------------------------------
+    }
     // STEP 3 -----------------------------------------------------------------
 
-
-    // STEP 5 -----------------------------------------------------------------
-    // I am doing something evil, but I believe in you.
-    // These STEP flags don't actually show you where to write the code next.
-    //
-    // We want our code to keep track of the number of points the player has,
-    //      and change the text on _pointsText when they earn a point by
-    //      making a goal.
-    //
-    // Do your best to code this.
-    //
-    // You will need to:
-    //      1. Create a new member variable to keep track of the points.
-    //      2. Use your MadeGoal method to update the points and text.
-    //
-    // STEP 5 -----------------------------------------------------------------
-    
-
     // STEP 6 -----------------------------------------------------------------
-    // Like the last step, these flags do NOT show you where to put all of the
-    //      code that you need to write.
-    //
-    // We want to keep track of how long it's been since the last time the
-    //      player scored a goal, and update _timeText with that time.
-    // Your time variable should increase EVERY FRAME with how much TIME has 
-    //      passed, and reset to ZERO when we MAKE A GOAL.
-    //
-    // You will need to:
-    //      1. Use a Unity method to increase your time variable every frame
-    //              and update _timeText with the new time.
-    //      2. Use the MadeGoal method to reset your
-    //              time variable when the player makes a goal. 
+    // Keep track of time every frame and update the text.
+    private void Update()
+    {
+        _timeSinceLastGoal += Time.deltaTime;
+        if (_timeText != null)
+        {
+            _timeText.text = "Time Since Last Goal: " + _timeSinceLastGoal.ToString("F2") + "s";
+        }
+    }
     // STEP 6 -----------------------------------------------------------------
 }
