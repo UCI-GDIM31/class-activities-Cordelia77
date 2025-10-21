@@ -27,6 +27,12 @@ Line 5: _moveSpeed is a member variable of type float. [SerializeField] lets us 
 Line 22: This line calls the method Input.GetAxis("Vertical") to read player input. The result (a float between -1 and 1) is multiplied by _moveSpeed and Time.deltaTime to calculate smooth movement.
 Line 25: This line calls the method Translate() from the Transform component to move the cat forward along the Z-axis by translation.
 
+table #5
+1. What solution did you come up with for the collider activity, and why? Specifically- which objects did you add Rigidbodies to, and which object(s) did you check Is Trigger on?
+We added Rigidbody to Cat and SoccerBall so that they can be affected by physics and collide with each other. Goal uses BoxCollider and Is Trigger is checked, so that when the ball enters the goal, it can be detected but not blocked.
+2. IF your game did not work perfectly the first time you tested it, talk about what you had to fix.
+At first, the cat didn't touch the ground when it was in the air. Later, it was discovered that the center of the collider needed to be adjusted, and the height and radius also needed to be gradually adjusted until the cat was in a suitable position. After making these changes, everything worked properly.
+
 
 ## Open-Source Assets
 ### W1
