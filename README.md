@@ -33,6 +33,22 @@ We added Rigidbody to Cat and SoccerBall so that they can be affected by physics
 2. IF your game did not work perfectly the first time you tested it, talk about what you had to fix.
 At first, the cat didn't touch the ground when it was in the air. Later, it was discovered that the center of the collider needed to be adjusted, and the height and radius also needed to be gradually adjusted until the cat was in a suitable position. After making these changes, everything worked properly.
 
+###W5
+1. What member variable(s) does this class need?
+2. What method(s) does this class need? Should it be something that Unity provides (like Start(), Update(), or a collision method), or one you write?
+3. What should the method(s) do?
+
+#answer
+1. (1) Transform _targetTransform: the Transform of the GameObject the deer should walk toward (e.g., a red mushroom).
+   (2) NavMeshAgent _agent: used to control the deer’s movement on the NavMesh.
+  
+2. Start(): a built-in Unity method that runs once when the game begins. It should find the NavMeshAgent and set its destination.
+
+3.
+In Start(), use GetComponent<NavMeshAgent>() to get the NavMeshAgent component attached to the Deer GameObject.  
+Then call _agent.SetDestination(_targetTransform.position) so the deer walks toward the target object.  
+_targetTransform should be adjustable in the Inspector to choose any target in the scene (like the red mushroom)
+
 
 ## Open-Source Assets
 ### W1
