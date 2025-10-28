@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17c3416f57a6407594216d570227c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CatW5
-  _flipWSControls: 0
+  _flipWSControls: 1
   _moveSpeed: 2.5
   _turnSpeed: 100
   _animator: {fileID: 1977093712}

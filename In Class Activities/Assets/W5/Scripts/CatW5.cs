@@ -12,23 +12,25 @@ public class CatW5 : MonoBehaviour
     private void Update()
     {
         // STEP 1 & 2 ---------------------------------------------------------
-        // Move forwards/backwards with W and S
+        // Get W/S input (forward/backward)
         float moveInput = Input.GetAxis("Vertical");
-        Vector3 translation = Vector3.forward * moveInput * _moveSpeed * Time.deltaTime;
 
-        // If flip controls is true, reverse the movement direction
+        // If flip controls is true, reverse input direction
         if (_flipWSControls)
         {
-            translation *= -1f;
+            moveInput = -moveInput;
         }
 
+        // Move the cat forward/backward along the Z-axis
+        Vector3 translation = Vector3.forward * moveInput * _moveSpeed * Time.deltaTime;
         transform.Translate(translation);
 
         // STEP 1 & 2 ---------------------------------------------------------
-
+        // Rotate the cat left/right with A and D
         float rotation = Input.GetAxis("Horizontal") * _turnSpeed * Time.deltaTime;
         transform.Rotate(0, rotation, 0);
 
+        // Update walking animation
         if (translation.magnitude != 0.0f || rotation != 0.0f)
         {
             _animator.SetBool(_isWalkingName, true);
