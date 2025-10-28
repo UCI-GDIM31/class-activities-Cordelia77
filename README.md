@@ -33,13 +33,13 @@ We added Rigidbody to Cat and SoccerBall so that they can be affected by physics
 2. IF your game did not work perfectly the first time you tested it, talk about what you had to fix.
 At first, the cat didn't touch the ground when it was in the air. Later, it was discovered that the center of the collider needed to be adjusted, and the height and radius also needed to be gradually adjusted until the cat was in a suitable position. After making these changes, everything worked properly.
 
-###W5
-#Activity1
+### W5
+Activity #1
 Question: What does transform.Translate() actually do in Unity?
 Answer:
 It moves the GameObject in its local coordinate space. For example, Vector3.forward means moving forward based on the object’s current rotation. If I want the movement to happen in the world space, I can use transform.Translate(direction, Space.World).
 
-#Activity2
+Activity #2
 1. What member variable(s) does this class need?
 2. What method(s) does this class need? Should it be something that Unity provides (like Start(), Update(), or a collision method), or one you write?
 3. What should the method(s) do?
