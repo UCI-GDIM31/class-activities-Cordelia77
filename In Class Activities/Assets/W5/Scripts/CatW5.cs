@@ -12,40 +12,17 @@ public class CatW5 : MonoBehaviour
     private void Update()
     {
         // STEP 1 & 2 ---------------------------------------------------------
-        // STEP 1
-        // This CatW5 class is a Component on the Cat GameObject. It controls
-        //      the cat's movement.
-        //
-        // The Cat should move forwards and backwards with the W and S keys.
-        //
-        // Use the "static properties" listed under the Vector3 documentation:
-        //  https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Vector3.html
-        //
-        // to change the value of the translation variable,
-        // and then call Translate on this GameObject's transform to make it move
-        // using translation, _moveSpeed, and Time.deltaTime.
-        //
-        // Ask yourself:
-        //      Which axis moves the cat forwards and backwards?
-        //      Which Vector3 static property would be useful here based on
-        //          changing that axis?
-        //      Should I modify translation with Vector addition, or multiplication,
-        //          or both?
-        //
-        // STEP 2
-        // After Step 1 is working, add more code to make it possible to flip
-        //      the player's control scheme.
-        // The _flipWSControls member variable, which we can change in the Inspector,
-        //      determines if our controls should be flipped.
-        // If _flipWSControls is true, interpret the value of translation as the
-        //      OPPOSITE value, so that W moves the player backwards and S moves
-        //      them forwards.
-        //
-        // MULTIPLY one of your vectors with a certain value to do this. >:)
+        // Move forwards/backwards with W and S
+        float moveInput = Input.GetAxis("Vertical");
+        Vector3 translation = Vector3.forward * moveInput * _moveSpeed * Time.deltaTime;
 
-        Vector3 translation = Vector3.zero;
-        
+        // If flip controls is true, reverse the movement direction
+        if (_flipWSControls)
+        {
+            translation *= -1f;
+        }
 
+        transform.Translate(translation);
 
         // STEP 1 & 2 ---------------------------------------------------------
 
