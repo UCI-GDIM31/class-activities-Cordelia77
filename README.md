@@ -57,7 +57,7 @@ _targetTransform should be adjustable in the Inspector to choose any target in t
 
 ### W6
 # Activity 1
-
+other tools, and for supplementing contents
 Google Doc Link: https://docs.google.com/document/d/1exNqQE_zGuOoztND9FT3ldDwkXjJ6m8a8oRDWERaMyg/edit?tab=t.0
 
 # Activity 2
