@@ -55,6 +55,34 @@ In Start(), use GetComponent<NavMeshAgent>() to get the NavMeshAgent component a
 Then call _agent.SetDestination(_targetTransform.position) so the deer walks toward the target object.  
 _targetTransform should be adjustable in the Inspector to choose any target in the scene (like the red mushroom)
 
+### W6
+# Activity 1
+
+Google Doc Link: https://docs.google.com/document/d/1exNqQE_zGuOoztND9FT3ldDwkXjJ6m8a8oRDWERaMyg/edit?tab=t.0
+
+# Activity 2
+1. Member Variables  
+Transform cat → Player object (Cat); the bat needs to know the player's position.  
+float speed → Bat's movement speed, adjustable in the Inspector.  
+bool isChasing → Flag to indicate if the bat is chasing the player.  
+
+2. Methods  
+- Unity built-in methods:  
+Update() → Checks if chasing is active every frame and moves the bat.
+- Custom methods:  
+StartChasing() → Sets isChasing = true to make the bat start chasing.  
+StopChasing() → Sets isChasing = false to make the bat stop chasing.  
+
+3. Method Behavior  
+Update(): If isChasing is true and the player exists, the bat moves toward the player.  
+StartChasing(): Enables chasing, callable by BatManager or for testing.  
+StopChasing(): Disables chasing, controlled by BatManager to manage the bat's behavior.
+
+Pair Programming Notes:
+My partner and I first discussed the necessary member variables and methods for the BatW6 class, clarifying our goals: ensuring the bat’s behavior triggers when the player approaches, and enabling the bat to chase the player during movement.  
+We collaborated on writing the code—I checked the logic and suggested optimizations (e.g., using Vector3.MoveTowards for the bat’s movement) while my partner handled the final modifications.  
+After completing the code, we tested it together to confirm the bat correctly chases the player and stops when StopChasing() is called.
+
 
 ## Open-Source Assets
 ### W1
