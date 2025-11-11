@@ -84,11 +84,6 @@ We collaborated on writing the code—I checked the logic and suggested optimiza
 After completing the code, we tested it together to confirm the bat correctly chases the player and stops when StopChasing() is called.
 
 ### W7
-好的 👍 下面是只保留**作业要求里明确要写进 Devlog 的内容**（没有多余描述，可直接提交）：
-
----
-
-## W7 In-Class Activity Devlog
 Activity 1:
 [[Link to our Google Doc](https://docs.google.com/document/d/1TsVke4FYWiPQJM1o9TWKmZdGuEjed6uXTYwZxrXfC3I/edit?usp=sharing)] 
 
