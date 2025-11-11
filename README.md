@@ -84,12 +84,12 @@ We collaborated on writing the code—I checked the logic and suggested optimiza
 After completing the code, we tested it together to confirm the bat correctly chases the player and stops when StopChasing() is called.
 
 ### W7
-Activity 1:
+### Activity 1:
 [[Link to our Google Doc](https://docs.google.com/document/d/1TsVke4FYWiPQJM1o9TWKmZdGuEjed6uXTYwZxrXfC3I/edit?usp=sharing)] 
 
 My Role: Gameplay System — I designed how the kitty plants flowers, including the flower’s three-stage growth process, scoring system, and interaction cooldown.
 
-Activity 2:
+### Activity 2:
 Question: What was wrong with the code in Step 2?
 Answer: The Step 2 code only used `transform.up` and didn’t adjust the direction according to the bubble’s surface normal. This caused the Muskrat to move incorrectly on curved surfaces. The correct approach is to redefine the “up” vector based on the bubble’s normal so that movement and gravity follow the bubble’s shape.
 
