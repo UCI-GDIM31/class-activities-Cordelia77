@@ -83,6 +83,21 @@ My partner and I first discussed the necessary member variables and methods for 
 We collaborated on writing the code—I checked the logic and suggested optimizations (e.g., using Vector3.MoveTowards for the bat’s movement) while my partner handled the final modifications.  
 After completing the code, we tested it together to confirm the bat correctly chases the player and stops when StopChasing() is called.
 
+### W7
+好的 👍 下面是只保留**作业要求里明确要写进 Devlog 的内容**（没有多余描述，可直接提交）：
+
+---
+
+## W7 In-Class Activity Devlog
+Activity 1:
+[[Link to our Google Doc](https://docs.google.com/document/d/1TsVke4FYWiPQJM1o9TWKmZdGuEjed6uXTYwZxrXfC3I/edit?usp=sharing)] 
+
+My Role: Gameplay System — I designed how the kitty plants flowers, including the flower’s three-stage growth process, scoring system, and interaction cooldown.
+
+Activity 2:
+Question: What was wrong with the code in Step 2?
+Answer: The Step 2 code only used `transform.up` and didn’t adjust the direction according to the bubble’s surface normal. This caused the Muskrat to move incorrectly on curved surfaces. The correct approach is to redefine the “up” vector based on the bubble’s normal so that movement and gravity follow the bubble’s shape.
+
 
 ## Open-Source Assets
 ### W1
