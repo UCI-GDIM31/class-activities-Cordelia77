@@ -12,9 +12,6 @@ public class MuskratW7 : MonoBehaviour
     private bool _orbitMode;
     private Transform _sphereTransform;
 
-    // Ground detection
-    private bool _isGrounded;
-
     // ------------------------------------------------------------------------
     private void Update()
     {
@@ -28,7 +25,6 @@ public class MuskratW7 : MonoBehaviour
         }
 
         Jump();
-        UpdateAnimations();
     }
 
     // ------------------------------------------------------------------------
@@ -50,8 +46,12 @@ public class MuskratW7 : MonoBehaviour
         // You might want to look below Step 3 for an example :D
 
         float leftright = Input.GetAxis("Horizontal");
-        float forward = Input.GetAxis("Vertical");
 
+
+
+        // STEP 3 -------------------------------------------------------------
+
+        float forward = Input.GetAxis("Vertical");
         Vector3 axis = transform.TransformDirection(Vector3.right);
         transform.RotateAround(
             _sphereTransform.position,
@@ -59,18 +59,27 @@ public class MuskratW7 : MonoBehaviour
             forward * _rotationSpeed * Time.deltaTime
         );
 
+        // rotate around the sphere using the muskrat's up vector (converted to world space)
+        Vector3 worldUp = transform.TransformDirection(Vector3.up);
         transform.RotateAround(
             _sphereTransform.position,
-            transform.TransformDirection(Vector3.up),
+            worldUp,
             leftright * _rotationSpeed * Time.deltaTime
         );
+
 
         // STEP 5 -------------------------------------------------------------
         // Once again, set the "flying" and "running" parameters to animate 
         //      the Muskrat.
         // The Muskrat should never play the "flying" animation while on a
         //      bubble.
+
+
         // STEP 5 -------------------------------------------------------------
+        // On a bubble: never flying. Running if there's input.
+        bool isRunning = Mathf.Abs(forward) > 0.01f || Mathf.Abs(leftright) > 0.01f;
+        _animator.SetBool("flying", false);
+        _animator.SetBool("running", isRunning);
     }
 
     // ------------------------------------------------------------------------
@@ -91,6 +100,7 @@ public class MuskratW7 : MonoBehaviour
         float leftright = Input.GetAxis("Horizontal");
 
         // STEP 1 -------------------------------------------------------------
+        transform.Rotate(Vector3.up, leftright * _rotationSpeed * Time.deltaTime, Space.World);
 
 
         // STEP 2 -------------------------------------------------------------
@@ -99,9 +109,11 @@ public class MuskratW7 : MonoBehaviour
         // This line of code is incorrect. 
         // Replace it with a different line of code that uses 'movement' to
         //      move the Muskrat forwards and backwards.
-        transform.Translate(Vector3.forward * movement * _moveSpeed * Time.deltaTime);
+        transform.position += movement * Vector3.forward * _moveSpeed * Time.deltaTime;
 
         // STEP 2 -------------------------------------------------------------
+        // fixed: move in the muskrat's forward direction (world-forward replaced with transform.forward)
+        transform.position += movement * transform.forward * _moveSpeed * Time.deltaTime;
 
 
         // STEP 4 -------------------------------------------------------------
@@ -110,13 +122,21 @@ public class MuskratW7 : MonoBehaviour
         // Use _rigidbody.linearVelocity.
         // You may also find the absolute value method, Mathf.Abs(), helpful:
         //      https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Mathf.Abs.html
+
+
         // STEP 4 -------------------------------------------------------------
+        // Use Rigidbody.velocity to determine running/flying state.
+        Vector3 vel = _rigidbody != null ? _rigidbody.linearVelocity : Vector3.zero;
+        bool isFlying = !_rigidbody.isKinematic && Mathf.Abs(vel.y) > 0.1f;
+        bool isRunning = Mathf.Abs(vel.x) > 0.1f || Mathf.Abs(vel.z) > 0.1f || Mathf.Abs(movement) > 0.01f;
+        _animator.SetBool("flying", isFlying);
+        _animator.SetBool("running", isRunning);
     }
 
     // ------------------------------------------------------------------------
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _rigidbody.isKinematic = false;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
@@ -128,26 +148,12 @@ public class MuskratW7 : MonoBehaviour
             }
 
             _orbitMode = false;
-            _isGrounded = false;
         }
-    }
-
-    // ------------------------------------------------------------------------
-    private void UpdateAnimations()
-    {
-        bool isMoving = Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0;
-        _animator.SetBool("running", isMoving && _isGrounded);
-        _animator.SetBool("flying", !_isGrounded);
     }
 
     // ------------------------------------------------------------------------
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            _isGrounded = true;
-        }
-
         if (collision.gameObject.tag.Equals("Ball"))
         {
             _orbitMode = true;
@@ -163,15 +169,6 @@ public class MuskratW7 : MonoBehaviour
                 contact.point,
                 Quaternion.LookRotation(tangent, contact.normal)
             );
-        }
-    }
-
-    // ------------------------------------------------------------------------
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            _isGrounded = false;
         }
     }
 }
