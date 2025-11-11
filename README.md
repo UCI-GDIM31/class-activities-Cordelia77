@@ -93,6 +93,14 @@ My Role: Gameplay System — I designed how the kitty plants flowers, including 
 Question: What was wrong with the code in Step 2?
 Answer: The Step 2 code only used `transform.up` and didn’t adjust the direction according to the bubble’s surface normal. This caused the Muskrat to move incorrectly on curved surfaces. The correct approach is to redefine the “up” vector based on the bubble’s normal so that movement and gravity follow the bubble’s shape.
 
+### MuskratW7 Code Plan
+Read WASD/arrow key input; on flat ground, use Transform.Rotate() for left/right rotation and Transform.Translate() for forward/backward movement.
+Detect spacebar for jumping; only apply upward force to the Rigidbody when _isGrounded is true.
+When colliding with a sphere, enter orbit mode; set Rigidbody to kinematic, adjust the Muskrat’s orientation using the sphere’s surface normal, and move with RotateAround().
+Update Animator parameters based on movement and airborne state: running when moving on the ground, flying when in the air.
+Use OnCollisionEnter and OnCollisionExit to detect ground and spheres, updating _isGrounded and _orbitMode accordingly.
+
+
 
 ## Open-Source Assets
 ### W1
